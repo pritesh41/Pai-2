@@ -1,11 +1,14 @@
-import React from 'react'
+import { createSlice } from '@reduxjs/toolkit';
 
-function cart() {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState: { items: JSON.parse(localStorage.getItem('cart') || '[]') },
+  reducers: {
+    addToCart(state, action) {
+      localStorage.setItem('cart', JSON.stringify(state.items));
+    },
+  },
+});
 
-export default cart
+export const { addToCart } = cartSlice.actions;
+export default cartSlice.reducer;
